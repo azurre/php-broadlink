@@ -1,0 +1,21 @@
+{
+  "name": "azurre/php-broadlink",
+  "description": "Broadlink device library",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Aleksandr Milenin",
+      "email": "admin@azrr.info"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Azurre\\Component\\SmartDevice\\Broadlink\\": "src/"
+    }
+  },
+  "license": "ISC",
+  "homepage": "",
+  "support": {
+    "issues": ""
+  }
+}
