@@ -1,7 +1,7 @@
 {
   "name": "azurre/php-broadlink",
   "description": "Broadlink device library",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors": [
     {
       "name": "Aleksandr Milenin",
