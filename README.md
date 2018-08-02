@@ -133,25 +133,6 @@ Output
 float(268.32)
 ```
 
-## Get current power
-```php
-$loader = require_once __DIR__ . '/vendor/autoload.php';
-echo '<pre>';
-$device = new \Azurre\Component\SmartDevice\Broadlink\Device\SP3S;
-list($id, $key, $time) = $storage->getAuthData('mydevice'); // Get auth data
-$device
-    ->setHost('192.168.0.190')
-    ->setMac('17:5e:be:34:ec:14')
-if (time() - $time >= \Azurre\Component\SmartDevice\Broadlink\Transport::AUTH_KEY_EXPIRE) {
-    $device->auth();
-    // Save auth data
-} else {
-    // Authorize using saved credentials
-    $device->auth($id, $key);
-}
-var_dump( $device->getCurrentPower() )
-```
-
 ## Set power state
 ```php
 $loader = require_once __DIR__ . '/vendor/autoload.php';
