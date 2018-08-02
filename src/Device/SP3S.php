@@ -22,29 +22,6 @@ class SP3S extends \Azurre\Component\SmartDevice\Broadlink\AbstractDevice
     protected $deviceType = 0x947a;
 
     /**
-     * @param array|null $id
-     * @param array|null $key
-     *
-     * @return array
-     */
-    public function auth($id = null, $key = null)
-    {
-        if ($id && $key) {
-            $this
-                ->getTransport()
-                ->setId($id)
-                ->setKey($key);
-
-            return [
-                'id'   => $this->getTransport()->getId(),
-                'key'  => $this->getTransport()->getKey()
-            ];
-        }
-
-        return $this->getTransport()->auth();
-    }
-
-    /**
      * @return array|bool
      */
     public function getPowerState()

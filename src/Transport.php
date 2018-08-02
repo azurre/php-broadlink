@@ -53,13 +53,16 @@ class Transport
 
     /**
      * @param string $localIpAddress
+     * @param int    $port
      *
      * @return array
      */
-    public static function discover($localIpAddress = null)
+    public static function discover($localIpAddress = null, $port = 80)
     {
         $devices = [];
-        list($localIpAddress, $port) = $localIpAddress ?: static::getLocalIpAddress();
+        if (!$localIpAddress) {
+            list($localIpAddress, $port) = static::getLocalIpAddress();
+        }
         if (!$localIpAddress) {
             return $devices;
         }
@@ -131,7 +134,6 @@ class Transport
             ];
         }
 
-        @socket_shutdown($socket);
         socket_close($socket);
 
         return $devices;
@@ -196,7 +198,6 @@ class Transport
         if (socket_connect($socket, '8.8.8.8', 53)) { // connecting to a UDP address doesn't send packets
             socket_getsockname($socket, $localIpAddress, $port);
         }
-        @socket_shutdown($socket);
         socket_close($socket);
 
         return [$localIpAddress, $port];
@@ -278,7 +279,6 @@ class Transport
         socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, ['sec' => $this->timeout, 'usec' => 0]);
         socket_sendto($socket, static::arrayToByte($packet), count($packet), 0, $this->host, $this->port);
         socket_recvfrom($socket, $response, 2048, 0, $from, $port);
-        @socket_shutdown($socket);
         socket_close($socket);
 
         $response = static::byteToArray($response);

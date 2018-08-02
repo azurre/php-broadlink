@@ -44,6 +44,29 @@ class AbstractDevice
     }
 
     /**
+     * @param array|null $id
+     * @param array|null $key
+     *
+     * @return array
+     */
+    public function auth($id = null, $key = null)
+    {
+        if ($id && $key) {
+            $this
+                ->getTransport()
+                ->setId($id)
+                ->setKey($key);
+
+            return [
+                'id'   => $this->getTransport()->getId(),
+                'key'  => $this->getTransport()->getKey()
+            ];
+        }
+
+        return $this->getTransport()->auth();
+    }
+
+    /**
      * @return \Azurre\Component\SmartDevice\Broadlink\Transport
      */
     public function getTransport()
@@ -53,5 +76,15 @@ class AbstractDevice
         }
 
         return $this->transport;
+    }
+
+    /**
+     * @param $type
+     * @return $this
+     * @todo complete method
+     */
+    public static function getDeviceByType($type)
+    {
+        return new \Azurre\Component\SmartDevice\Broadlink\Device\SP3S;
     }
 }
